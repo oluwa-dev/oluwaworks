@@ -117,7 +117,6 @@
   --font-geist: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
                "Liberation Mono", monospace;
 }
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
