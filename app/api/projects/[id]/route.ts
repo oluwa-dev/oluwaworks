@@ -9,17 +9,17 @@ const selectProject = {
   id: true,
   title: true,
   blurb: true,
-  imageUrl: true, 
+  imageUrl: true,
   tags: true,
-  featured: true, 
-  createdAt: true, 
+  featured: true,
+  createdAt: true,
   updatedAt: true,
 } as const;
 
 const PatchSchema = z.object({
   title: z.string().min(1).max(200).optional(),
   blurb: z.string().min(1).max(4000).optional(),
-  imageUrl: z.string().url().or(z.literal("")).optional(), 
+  imageUrl: z.string().url().or(z.literal("")).optional(),
   tags: z.array(z.string().min(1).max(40)).max(20).optional(),
   featured: z.boolean().optional(),
 });
@@ -30,9 +30,10 @@ function bad(message: string, status = 400) {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const id = Number(idParam);
   if (!Number.isInteger(id)) return bad("Invalid id");
 
   const data = await prisma.project.findUnique({
@@ -47,9 +48,10 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const id = Number(idParam);
   if (!Number.isInteger(id)) return bad("Invalid id");
 
   let json: unknown;
@@ -84,7 +86,6 @@ export async function PATCH(
     });
 
     // Optionally: revalidate public pages if you use ISR with tags
-  
 
     return NextResponse.json({ success: true, data: updated });
   } catch (e: any) {
@@ -96,14 +97,14 @@ export async function PATCH(
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const { id: idParam } = await params;
+  const id = Number(idParam);
   if (!Number.isInteger(id)) return bad("Invalid id");
 
   try {
     await prisma.project.delete({ where: { id } });
-    // Optionally: revalidateTag("works");
     return NextResponse.json({ success: true });
   } catch (e: any) {
     if (e?.code === "P2025") return bad("Project not found", 404);
