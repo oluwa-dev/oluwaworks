@@ -1,46 +1,138 @@
 /** @format */
-import { absoluteUrl } from "@/lib/absoluteUrlHandler";
 import ProjectsTable from "@/modules/admin/projects/projecttable";
 import Link from "next/link";
 import { Suspense } from "react";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authHandler } from "@/lib/auth/authhandler";
+import { redirect } from "next/navigation";
 
+type Item = {
+  id: number;
+  title: string;
+  blurb: string;
+  imageUrl?: string | null;
+  tags: string[];
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
 
+type ApiList = {
+  success: boolean;
+  data: Item[];
+  count: number;
+  nextCursor?: string | null;
+};
 
 async function getProjects(params: {
   featured?: string;
   tags?: string;
   search?: string;
   cursor?: string;
-}) {
-  const qs = new URLSearchParams({
-    ...(params.featured ? { featured: params.featured } : {}),
-    ...(params.tags ? { tags: params.tags } : {}),
-    ...(params.search ? { search: params.search } : {}),
-    ...(params.cursor ? { cursor: params.cursor } : {}),
-    limit: "30",
-  });
-  const res = await fetch( await absoluteUrl(`/api/projects?${qs}`), {
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error("Failed to load projects");
-  return res.json();
+}): Promise<ApiList> {
+  const session = await getServerSession(authHandler);
+  if (!session) {
+    redirect("/login"); 
+  }
+
+  try {
+    const { featured, tags, search, cursor } = params;
+    const limit = 30;
+
+    const where: any = {};
+    const conditions: any[] = [];
+
+    if (featured === "true") {
+      conditions.push({ featured: true });
+    } else if (featured === "false") {
+      conditions.push({ featured: false });
+    }
+
+    if (search) {
+      conditions.push({
+        OR: [
+          { title: { contains: search, mode: "insensitive" } },
+          { blurb: { contains: search, mode: "insensitive" } },
+        ],
+      });
+    }
+
+    // Handle tags filter
+    if (tags) {
+      const tagArray = tags.split(",").filter(Boolean);
+      if (tagArray.length > 0) {
+        conditions.push({
+          tags: {
+            hasSome: tagArray,
+          },
+        });
+      }
+    }
+
+    if (conditions.length > 0) {
+      where.AND = conditions;
+    }
+
+    const rawItems = await prisma.project.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: limit,
+      ...(cursor ? { skip: 1, cursor: { id: Number(cursor) } } : {}),
+      select: {
+        id: true,
+        title: true,
+        blurb: true,
+        imageUrl: true,
+        tags: true,
+        featured: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    const items: Item[] = rawItems.map((item) => ({
+      id: item.id,
+      title: item.title,
+      blurb: item.blurb,
+      imageUrl: item.imageUrl,
+      tags: item.tags,
+      featured: item.featured,
+      createdAt: item.createdAt.toISOString(),
+      updatedAt: item.updatedAt.toISOString(),
+    }));
+
+    const nextCursor =
+      items.length === limit ? String(items[items.length - 1].id) : null;
+
+    return {
+      success: true,
+      data: items,
+      count: items.length,
+      nextCursor,
+    };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return {
+      success: false,
+      data: [],
+      count: 0,
+      nextCursor: null,
+    };
+  }
 }
 
 export default async function ProjectsPage({
   searchParams,
 }: {
   searchParams: any;
-  }) {
-  
-  
-  const params = await searchParams
+}) {
+  const params = await searchParams;
   const data = await getProjects({
     featured: params?.featured,
     tags: params?.tags,
     search: params?.q,
   });
-  // console.log(data, "server comp");
-  
 
   const tags = ["custom", "shopify", "nocode", "wordpress"];
 
@@ -53,7 +145,10 @@ export default async function ProjectsPage({
         </div>
 
         <div>
-          <Link className="text-[14px] bg-main-blue rounded-lg px-2 py-2" href="/dashboard/projects/new">
+          <Link
+            className="text-[14px] bg-main-blue rounded-lg px-2 py-2"
+            href="/dashboard/projects/new"
+          >
             Add New
           </Link>
         </div>
