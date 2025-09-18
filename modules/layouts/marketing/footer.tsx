@@ -35,10 +35,11 @@ export default function Footer({ brandWord = "" }: { brandWord?: string }) {
 
         <div className="mt-6 text-center">
           <a
-            href="mailto:ayokunumitoluwani@gmail.com"
+            href="dev@buildwithayo.com"
             className="inline-block text-sm text-slate-300 hover:text-white transition-colors"
           >
-Contact: dev@buildwithayo.com          </a>
+            Contact: dev@buildwithayo.com{" "}
+          </a>
         </div>
 
         <div className="mt-4 border-t border-white/10 py-6 text-center text-xs text-slate-400">
