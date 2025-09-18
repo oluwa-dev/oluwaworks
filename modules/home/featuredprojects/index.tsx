@@ -172,7 +172,7 @@ function FeaturedCard({
             ))}
           </div>
 
-          <span className="mt-4 inline-flex items-center gap-1 text-sm text-white">
+          <span className="mt-4 inline-flex items-center gap-1 text-sm text-white underline">
             See live
             <svg
               className="h-4 w-4"
