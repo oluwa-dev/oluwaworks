@@ -60,18 +60,19 @@ export function Loader({
     );
   }
 
-  if (overlay) {
-    return (
-      <div className="absolute inset-0 z-[60] grid place-items-center rounded-2xl bg-black/40 backdrop-blur-sm">
-        {wrapper}
-      </div>
-    );
-  }
+ if (overlay) {
+   return (
+     <div className="fixed inset-0 z-[80] grid place-items-center bg-black/40 backdrop-blur-sm">
+       <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(60%_60%_at_50%_40%,rgba(96,165,250,.18),transparent_60%)]" />
+       {wrapper}
+     </div>
+   );
+ }
+
 
   return wrapper;
 }
 
-/* ---------------- VARIANTS ---------------- */
 
 function Spinner({ size }: { size: Size }) {
   const map = {

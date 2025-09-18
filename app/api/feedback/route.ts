@@ -13,7 +13,7 @@ cloudinary.config({
 });
 
 
-// To add feedback
+// To add a feedback
 export async function POST(req: NextRequest) {
   const form = await req.formData().catch(() => null);
   if (!form) {
@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    
     if (file.size > 5 * 1024 * 1024) {
       return NextResponse.json(
         { success: false, message: "Image too large (max 5MB)" },

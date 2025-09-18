@@ -113,15 +113,20 @@
 }
 
 @theme {
-  --font-manrope: var(--manrope)
-  --font-geist: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
-               "Liberation Mono", monospace;
+  --font-body: var(--font-manrope);
+  --font-heading: var(--font-outfit);
 }
 @layer base {
   * {
     @apply border-border outline-ring/50;
   } 
-  p { font-family: var(--font-manrope); }
+
+ 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  
+  p { font-family: var(--font-body); }
 
   body {
     @apply bg-[#0B0F14] text-foreground;

@@ -105,13 +105,11 @@ export default function ProjectListClient({
           </div>
         </aside>
 
-        {/* List */}
         <div className="space-y-8 md:col-span-9">
           {filtered.map((p, i) => (
             <ProjectRow key={p.id} p={p} flip={i % 2 === 1} />
           ))}
 
-          {/* Load more */}
           {nextCursor && (
             <div className="mt-2 flex justify-center">
               <button
@@ -139,6 +137,7 @@ function ProjectRow({ p, flip = false }: { p: Project; flip?: boolean }) {
   return (
     <Link
       href={p.href || "#"}
+      target="_blank"
       className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition hover:border-brand-blue/40"
     >
       <div

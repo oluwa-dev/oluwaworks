@@ -6,6 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createProjectSchema } from "@/lib/validations/project";
 import { v2 as cloudinary } from "cloudinary";
+import { authHandler } from "@/lib/auth/authhandler";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -41,13 +44,21 @@ function coerceTags(form: FormData): string[] | undefined {
 }
 
 export async function POST(request: NextRequest) {
+
+  const session = await getServerSession(authHandler)
+  if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+
+  }
+
   let imageUrl: string | undefined;
 
   const form = await request.formData();
   const title = String(form.get("title") || "").trim();
   const blurb = String(form.get("blurb") || "").trim();
   const href = String(form.get("href") || "").trim() || undefined;
-  const featured = coerceBoolean(form.get("featured")); // supports "on"/"true"/"false"
+  const featured = coerceBoolean(form.get("featured")); 
   const tags = coerceTags(form);
 
   const file = form.get("image") as File | null;

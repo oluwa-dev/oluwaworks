@@ -1,6 +1,7 @@
 /** @format */
 import { absoluteUrl } from "@/lib/absoluteUrlHandler";
 import ProjectsTable from "@/modules/admin/projects/projecttable";
+import Link from "next/link";
 import { Suspense } from "react";
 
 
@@ -49,6 +50,12 @@ export default async function ProjectsPage({
         <div>
           <h1 className="text-2xl font-semibold md:text-3xl">Projects</h1>
           <p className="mt-1 text-slate-300">Manage projects</p>
+        </div>
+
+        <div>
+          <Link className="text-[14px] bg-main-blue rounded-lg px-2 py-2" href="/dashboard/projects/new">
+            Add New
+          </Link>
         </div>
       </header>
 

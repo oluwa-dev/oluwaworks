@@ -1,8 +1,18 @@
 /** @format */
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authHandler } from "@/lib/auth/authhandler";
 
 export async function GET(req: Request) {
+
+  const session = await getServerSession(authHandler)
+    if (!session) {
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  
+  
+    }
+  
   try {
     const url = new URL(req.url);
     const status = url.searchParams.get("status") || undefined;

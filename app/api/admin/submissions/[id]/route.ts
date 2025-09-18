@@ -2,11 +2,20 @@
 
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authHandler } from "@/lib/auth/authhandler";
 
 export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+
+
+  const session = await getServerSession(authHandler)
+  if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+}
   const { id } = await params; 
   const body = await req.json().catch(() => ({}));
   const { status, read } = body as {
@@ -27,8 +36,13 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+
+   const session = await getServerSession(authHandler);
+   if (!session) {
+     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+   }
   try {
-    const { id } = await params; // Await the params Promise
+    const { id } = await params; 
     await prisma.submission.delete({ where: { id: Number(id) } });
     return NextResponse.json({ ok: true });
   } catch (e) {

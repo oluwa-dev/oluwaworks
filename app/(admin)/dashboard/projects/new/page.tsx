@@ -260,9 +260,9 @@ export default function AddProjectPage() {
           <button
             type="submit"
             disabled={loading}
-            className="h-11 w-full bg-brand-blue-deep cursor-pointer rounded-xl bg-brand-blue px-5 font-medium text-white hover:bg-brand-blue-deep disabled:opacity-60"
+            className="h-11 w-full sm:w-[250px] mx-auto  cursor-pointer rounded-xl bg-main-blue px-5 font-medium text-white hover:bg-brand-blue-deep disabled:opacity-60"
           >
-            {loading ? "Creating…" : "Create project"}
+            {loading ? "Adding..." : "Create project"}
           </button>
         </div>
       </form>

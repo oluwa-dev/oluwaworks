@@ -38,7 +38,6 @@ export default function HeroTerminal() {
 
   return (
     <section className="relative isolate overflow-hidden bg-[#0B0F14] text-white">
-      {/* Soft grid + glow */}
       <div className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(60%_60%_at_50%_0%,rgba(96,165,250,0.22),transparent_60%)]" />
       <div
         aria-hidden

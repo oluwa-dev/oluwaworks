@@ -43,7 +43,7 @@ export default function Testimonials() {
   const [testimonials, setTestimonials] =
     useState<Testimonial[]>(SAMPLE_TESTIMONIALS);
   const [isLoading, setIsLoading] = useState(false);
-
+const [err, setErr] = useState< string | null >(null)
   useEffect(() => {
     const fetchFeedbacks = async () => {
       setIsLoading(true);
@@ -65,8 +65,8 @@ export default function Testimonials() {
          id: item.id,
          quote: item.feedback,
          name: item.name,
-         role: item.role || item.businessName, // Use businessName as fallback for display
-         businessName: item.businessName, // Keep businessName as separate field
+         role: item.role || item.businessName, 
+         businessName: item.businessName, 
          avatar: item.imageUrl,
          createdAt: item.createdAt,
        }));
@@ -77,11 +77,13 @@ export default function Testimonials() {
           setTestimonials(transformedData);
         }
       } catch (error) {
-        toast({
-          title: "Error",
-          description: "Failed to load testimonials",
-          variant: "destructive",
-        });
+
+        setErr("Failed to load Reviews")
+        // toast({
+        //   title: "Error",
+        //   description: "Failed to load testimonials",
+        //   variant: "destructive",
+        // });
       } finally {
         setIsLoading(false);
       }
@@ -99,8 +101,12 @@ export default function Testimonials() {
         </p>
 
         {isLoading && (
-          <div className="mt-8 text-slate-400">Loading testimonials...</div>
+          <div className="mt-8 text-slate-400">Loading...</div>
         )}
+
+        <p className="text-gray-300 text-[14px] italic">
+          {err}
+        </p>
 
         <div className="mt-8 overflow-hidden">
           <div className="flex min-w-max gap-4 animate-[marquee_22s_linear_infinite] [--tw:80%] hover:[animation-play-state:paused]">

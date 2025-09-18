@@ -35,13 +35,16 @@ export default function FeedbackPage() {
       setLoading(false);
       return;
     }
-    if (file && !file.type.startsWith("image/")) {
-      toast({
-        title: "Invalid file",
-        description: "Only image files are allowed.",
-      });
-      setLoading(false);
-      return;
+
+    if (file && file.size > 0) {
+      if (file && !file.type.startsWith("image/")) {
+        toast({
+          title: "Invalid file",
+          description: "Only image files are allowed.",
+        });
+        setLoading(false);
+        return;
+      }
     }
 
     try {
@@ -79,10 +82,20 @@ export default function FeedbackPage() {
   }
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-14 text-white">
-      <h1 className="text-3xl font-semibold md:text-4xl">Leave a feedback</h1>
+    <section className="mx-auto max-w-2xl px-6 py-10 sm:py-14 text-slate-200 ">
+      <h1 className="text-2xl font-semibold text-gray-100  md:text-3xl">
+        Leave a feedback
+      </h1>
+      <p className="mt-3 text-[14px] text-slate-300 leading-relaxed">
+        <span className="!text-shadow-brand-blue-light font-medium">
+          Thanks for trusting me with your project!
+        </span>{" "}
+        Had a great time working together. Got a minute for a quick review? Your
+        honest take helps me level up and helps future clients know what to
+        expect.
+      </p>
 
-      <form onSubmit={submit} className="mt-6 space-y-4">
+      <form onSubmit={submit} className="mt-8 space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <Input
             name="name"
@@ -104,13 +117,27 @@ export default function FeedbackPage() {
           className="h-11 rounded-xl border border-white/10 bg-white/5 px-3"
         />
 
-        <Input
-          name="image"
-          type="file"
-          accept="image/*"
-          placeholder="Your picture (optional)"
-          className="h-11 rounded-xl border border-white/10 bg-white/5 px-3"
-        />
+        <div className="space-y-2">
+          <div>
+            <label className="text-[14px] text-slate-300" htmlFor="avatar">
+              Add a photo (optional) — a face to the name 🙂
+            </label>
+          </div>
+          <Input
+            name="image"
+            type="file"
+            accept="image/*"
+            className="
+    h-11 rounded-xl border border-white/10 bg-white/5 px-3 text-slate-200
+
+    file:mr-3 file:rounded-lg file:border-0
+    file:bg-main-blue file:px-3 
+    file:text-white file:text-sm file:font-medium file:cursor-pointer
+    hover:file:bg-brand-blue-deep
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue/50
+  "
+          />
+        </div>
         <textarea
           name="feedback"
           required
@@ -119,7 +146,6 @@ export default function FeedbackPage() {
           className="w-full rounded-xl border border-white/10 bg-white/5 p-3"
         />
 
-        {/* Honeypot (bots will fill it; humans won't see it) */}
         <Input
           type="text"
           name="website"
@@ -132,9 +158,9 @@ export default function FeedbackPage() {
           type="submit"
           disabled={loading}
           aria-busy={loading}
-          className="h-11 w-full bg-brand-blue-deep cursor-pointer rounded-xl bg-brand-blue px-5 font-medium text-white hover:bg-brand-blue-deep disabled:opacity-60"
+          className="h-11 w-full bg-main-blue cursor-pointer rounded-lg bg-brand-blue px-5 font-medium text-white hover:bg-brand-blue-deep disabled:opacity-60"
         >
-          {loading ? "Sending…" : "Send feedback"}
+          {loading ? "Submitting.." : "Submit"}
         </button>
       </form>
     </section>

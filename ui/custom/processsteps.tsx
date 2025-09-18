@@ -55,10 +55,10 @@ export default function ProcessSteps() {
 
       <div className="mt-6">
         <a
-          href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-blue-deep"
+          href="/services"
+          className="inline-flex items-center gap-2 text-brand-blue-light rounded-lg bg-brand-blue px-4 py-2 text-sm font-medium  transition hover:underline"
         >
-          Start your project
+          Check my services
           <svg
             className="h-4 w-4"
             viewBox="0 0 20 20"

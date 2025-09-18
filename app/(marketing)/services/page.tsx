@@ -1,15 +1,23 @@
 /** @format */
 
-// app/services/page.tsx
 import CTA from "@/ui/custom/cta";
-import ProcessStep from "@/ui/custom/processsteps";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services — Full-stack, No-code, Shopify, WordPress, SEO",
+  title: "Services — Web development, Shopify, WordPress, SEO, Next.js, React",
   description:
-    "Next.js/React/Express/Node, databases & AI. Shopify (themes, Storefront API, Liquid), WordPress (custom PHP, Sage), plus SEO & performance.",
+    "From no-code/low-code builds to custom Next.js apps, Shopify stores, and technical SEO",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services — Web development, Shopify, WordPress, SEO, React",
+    description:
+      "From no-code/low-code builds to custom Next.js apps, Shopify stores, and technical SEO",
+    url: "https://buildwithayo.com/services",
+    siteName: "BuildwithAyo",
+    images: [{ url: "/og/about.jpg", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function ServicesPage() {
@@ -24,10 +32,8 @@ export default function ServicesPage() {
   ];
 
   return (
-      <section className="bg-brand-black text-white">
-          
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        
+    <section className=" text-white">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:py-14">
         <header className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-blue-200">
             Services tailored to outcomes
@@ -35,18 +41,18 @@ export default function ServicesPage() {
           <h1 className="mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
             Build fast. Rank higher. Sell more.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-slate-300">
+          <p className="mx-auto mt-6 max-w-2xl text-[14px] text-slate-300">
             From <strong>full-stack apps</strong> (Next.js, React, Express,
             Node, databases, AI) to <strong>Shopify</strong> and{" "}
-            <strong>WordPress</strong> sites including SEO that actually moves the
-            needle.
+            <strong>WordPress</strong> sites including SEO that actually moves
+            the needle.
           </p>
 
           <nav
             aria-label="Services"
-            className="my-6 -mx-6 overflow-x-auto px-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="my-6 -mx-6 overflow-x-auto px-6 sm:overflow-visible"
           >
-            <ul className="flex w-full min-w-0 items-center justify-center gap-2 md:gap-3">
+            <ul className="flex  items-center justify-center gap-2 flex-wrap md:gap-3">
               {nav.map((n) => (
                 <li key={n.id}>
                   <a
@@ -65,7 +71,6 @@ export default function ServicesPage() {
           <ServiceCard
             id="fullstack"
             title="Custom Full-stack Development"
-            eyebrow="Next.js · React · Express/Node · Databases"
             points={[
               "Modern web apps with clean APIs (REST/GraphQL/tRPC).",
               "Postgres/MySQL/Mongo with migrations & backups.",
@@ -84,37 +89,8 @@ export default function ServicesPage() {
           />
 
           <ServiceCard
-            id="shopify"
-            title="Shopify eCommerce"
-            eyebrow="Themes · Apps · CRO"
-            points={[
-              "Theme setup or refactor for speed and UX.",
-              "Conversion-first PDP/PLP, search & merchandising.",
-              "App integrations, reviews, analytics, subscriptions.",
-              "Checkout/flows with best-practice tracking.",
-            ]}
-            badges={["shopify", "theme", "apps", "analytics", "cRO"]}
-            cta={{ label: "See Shopify work", href: "/work?tag=shopify" }}
-          />
-
-          <ServiceCard
-            id="shopify-custom"
-            title="Shopify Custom (Storefront API & Liquid)"
-            eyebrow="Headless · Storefront API · Liquid"
-            points={[
-              "Headless storefronts (Next.js) consuming Storefront API.",
-              "Custom sections/blocks in Liquid for flexible content.",
-              "Webhook-based ops & custom middleware.",
-              "Performance budgets and Core Web Vitals on storefront.",
-            ]}
-            badges={["storefront api", "liquid", "headless", "nextjs"]}
-            cta={{ label: "Talk custom Shopify", href: "/contact" }}
-          />
-
-          <ServiceCard
             id="wordpress"
             title="WordPress Websites"
-            eyebrow="Business sites · Blogs · CMS"
             points={[
               "Brand-tight CMS with custom post types/fields.",
               "Editor experience that’s actually simple.",
@@ -128,9 +104,8 @@ export default function ServicesPage() {
           <ServiceCard
             id="wp-custom"
             title="Custom WordPress Dev + PHP"
-            eyebrow="Sage starter theme · Plugins · APIs"
             points={[
-              "Sage/Trellis/Bedrock or other modern starter stacks.",
+              "Custom theme or Sage/Trellis/Bedrock or other modern starter stacks.",
               "Reusable components & plugin development.",
               "REST APIs, SSO, and 3rd-party integrations.",
               "Unit tests & CI for mission-critical sites.",
@@ -166,14 +141,38 @@ export default function ServicesPage() {
             badges={["ai", "zapier", "make", "webhooks"]}
             cta={{ label: "Plan an automation", href: "/contact" }}
           />
+          <ServiceCard
+            id="shopify"
+            title="Shopify eCommerce"
+            points={[
+              "Theme setup or refactor for speed and UX.",
+              "Conversion-first PDP/PLP, search & merchandising.",
+              "App integrations, reviews, analytics, subscriptions.",
+              "Checkout/flows with best-practice tracking.",
+            ]}
+            badges={["shopify", "theme", "apps", "analytics", "cRO"]}
+            cta={{ label: "See Shopify work", href: "/work?tag=shopify" }}
+          />
+
+          <ServiceCard
+            id="shopify-custom"
+            title="Shopify Custom (Storefront API & Liquid)"
+            points={[
+              "Headless storefronts (Next.js) consuming Storefront API.",
+              "Custom sections/blocks in Liquid for flexible content.",
+              "Webhook-based ops & custom middleware.",
+              "Performance budgets and Core Web Vitals on storefront.",
+            ]}
+            badges={["storefront api", "liquid", "headless", "nextjs"]}
+            cta={{ label: "Talk custom Shopify", href: "/contact" }}
+          />
         </div>
-          </div>
-          <CTA />
+      </div>
+      <CTA />
     </section>
   );
 }
 
-/* ---------- Components ---------- */
 
 function ServiceCard({
   id,
@@ -185,7 +184,7 @@ function ServiceCard({
 }: {
   id: string;
   title: string;
-  eyebrow: string;
+  eyebrow?: string;
   points: string[];
   badges?: string[];
   cta?: { label: string; href: string };
@@ -229,7 +228,7 @@ function ServiceCard({
         <div className="mt-5">
           <Link
             href={cta.href}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-blue px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-blue-deep"
+            className="inline-flex items-center gap-2 rounded-lg bg-main-blue px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-blue-deep"
           >
             {cta.label}
             <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">

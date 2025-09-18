@@ -70,12 +70,12 @@ function HeroGrid() {
               for projects
             </div>
 
-            <h1 className="mt-6 text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+            <h1 className="mt-6 text-5xl font-semibold leading-tight font-heading tracking-tight md:text-6xl">
               I build <span className="text-blue-400">fast</span>,
               <br />
-              <span className="text-blue-300">beautiful</span> web apps.
+              <span className="text-blue-300 ">beautiful</span> web apps.
             </h1>
-            <p className="mt-4 max-w-xl text-slate-300">
+            <p className="mt-4 max-w-xl text-[14px] text-slate-300">
                My focus is making sure your site loads fast, looks
               great, and gets visitors to take action - that could be them buying
               something, signing up, or whatever goal you have in mind.

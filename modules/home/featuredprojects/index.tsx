@@ -37,10 +37,22 @@ export default function FeaturedWork({ maxShown = 2 }: { maxShown?: 2 | 3 }) {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         const projects: Project[] = Array.isArray(json?.data) ? json.data : [];
+
+        
         if (!cancelled) {
-          if (projects.length) {
-            setItems(projects.slice(0, maxShown));
+          if (projects.length > 0) {
+            const normalized = projects.map((p) => ({
+              ...p,
+              href: p.href ?? "",
+            }));
+
+           
+            
+            setItems(normalized);
+            
           } 
+
+          
         }
       } catch (e) {
         console.error("Featured fetch failed:", e);
@@ -54,7 +66,7 @@ export default function FeaturedWork({ maxShown = 2 }: { maxShown?: 2 | 3 }) {
     };
   }, [maxShown]);
 
-  const skeletonCount = maxShown; // 2 or 3
+  const skeletonCount = maxShown; 
 
   return (
     <section
@@ -75,7 +87,7 @@ export default function FeaturedWork({ maxShown = 2 }: { maxShown?: 2 | 3 }) {
           </div>
           <Link
             href="/work"
-            className="mb-3 rounded-xl border border-white/10 bg-main-blue px-4 py-2 text-sm font-medium text-white/90 transition hover:bg-brand-blue-deep hover:text-white"
+            className="mb-3 rounded-lg border border-white/10 bg-main-blue px-4 py-2 text-sm font-medium text-white/90 transition hover:bg-brand-blue-deep hover:text-white"
           >
             View all work
           </Link>
@@ -121,13 +133,16 @@ function FeaturedCard({
 }) {
   return (
     <Link
-      href={p.href || "#"}
+      target="_blank"
+      href={p?.href ?? "#"}
       className={
-        "group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-0 transition hover:border-brand-blue/40 hover:shadow-[0_0_60px_rgba(96,165,250,0.25)] " +
+        "group relative h-full overflow-hidden " +
+        "rounded-2xl border border-white/10 bg-white/5 p-0 transition " +
+        "hover:border-brand-blue/40 hover:shadow-[0_0_60px_rgba(96,165,250,0.25)] " +
         className
       }
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
+      <div className="relative h-full min-h-[280px] w-full overflow-hidden md:min-h-[340px] lg:min-h-[420px]">
         {p.imageUrl ? (
           <img
             src={p.imageUrl}

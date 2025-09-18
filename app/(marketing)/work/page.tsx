@@ -1,12 +1,26 @@
 /** @format */
 
-// app/work/page.tsx
 import { prisma } from "@/lib/prisma";
 import ProjectListClient from "@/modules/work";
-// client component below
-
+import { Metadata } from "next";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Work & case studies — BuildwithAyo",
+  description:
+    "Selected projects across no-code, low-code, and custom builds. Results that load fast and convert.",
+  alternates: { canonical: "/work" },
+  openGraph: {
+    title: "Work & case studies — BuildwithAyo",
+    description:
+      "Selected projects across no-code, low-code, and custom builds. Results that load fast and convert.",
+    url: "https://buildwithayo.com/work",
+    siteName: "BuildwithAyo",
+    images: [{ url: "/og/about.jpg", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image" },
+};
 
 export default async function WorkPage({
   searchParams,
@@ -63,7 +77,7 @@ export default async function WorkPage({
 
         <ProjectListClient
           initial={{ items, nextCursor }}
-          knownTags={["custom", "shopify", "nocode", "wordpress"]}
+          knownTags={["wordpress", "custom", "shopify", "react", "nextjs" ]}
         />
       </div>
     </section>

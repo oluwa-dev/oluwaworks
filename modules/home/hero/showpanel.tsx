@@ -51,7 +51,7 @@ export default function ShowcasePanel() {
           />
 
           <div className="mt-5 grid gap-3 sm:gap-4 sm:grid-cols-2">
-            <Card title="Landing page (Webflow)" note="Ship in 7–10 days">
+            <Card title="Landing page (Wordpress)" note="Ship in 7–10 days">
               Reusable CMS collections, SEO-ready, brand-tight.
             </Card>
             <Card title="Storefront (Shopify)" note="From idea → live fast">

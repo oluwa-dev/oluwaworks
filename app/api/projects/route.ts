@@ -43,6 +43,7 @@ export async function GET(request: NextRequest) {
         id: true,
         title: true,
         blurb: true,
+        href: true,
         imageUrl: true,
         tags: true,
         featured: true,
