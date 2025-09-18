@@ -62,7 +62,7 @@ function HeroGrid() {
         className="pointer-events-none absolute inset-0 opacity-20 [background-size:32px_32px] [background-image:linear-gradient(to_right,rgba(96,165,250,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.15)_1px,transparent_1px)]"
       />
 
-      <div className="mx-auto max-w-7xl px-6 py-20 md:py-36">
+      <div className="mx-auto max-w-7xl px-6 py-16 md:py-36">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-blue-200">
