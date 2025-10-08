@@ -12,7 +12,7 @@ export default function PublicLayout({
     <>
       <Navbar />
       <main className="min-h-[60dvh]">{children}</main>
-      <Footer brandWord="BuildwithAyo" />
+      <Footer brandWord="Oluwaworks" />
     </>
   );
 }

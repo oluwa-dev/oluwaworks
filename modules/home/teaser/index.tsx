@@ -73,14 +73,13 @@ export default function AboutTeaser({
 
           <div className="min-w-0 flex-1">
             <h3 className="text-xl lg:text-2xl font-semibold">
-              Web developer who handles the full spectrum
+              Web developer who owns the outcome
             </h3>
             <p className="mt-2 text-sm lg:text-base text-slate-300">
               Whether you need a{" "}
               <span className="text-blue-200">CMS website</span>, an{" "}
               <span className="text-blue-200">e-commerce store</span>, or a{" "}
-              <span className="text-blue-200">custom web application</span> - I
-              deliver solutions that work reliably.
+              <span className="text-blue-200">custom web application</span> -  I map your funnel, track the right events, and remove friction so more visitors become customers. The build is fast and scalable. The result is momentum.
             </p>
           </div>
 

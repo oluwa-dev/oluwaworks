@@ -66,19 +66,17 @@ function HeroGrid() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-blue-200">
-              <span className="h-2 w-2 rounded-full bg-blue-400" /> Available
+              <span className="h-2 w-2 rounded-full bg-green-400" /> Available
               for projects
             </div>
 
             <h1 className="mt-6 text-5xl font-semibold leading-tight font-heading tracking-tight md:text-6xl">
-              I build <span className="text-blue-400">fast</span>,
+              I build <span className="text-blue-400">websites</span>,
               <br />
-              <span className="text-blue-300 ">beautiful</span> web apps.
+              <span className="text-blue-300 ">that grow</span> revenue.
             </h1>
             <p className="mt-4 max-w-xl text-[14px] text-slate-300">
-               My focus is making sure your site loads fast, looks
-              great, and gets visitors to take action - that could be them buying
-              something, signing up, or whatever goal you have in mind.
+               I design and ship marketing-driven sites that load fast, rank higher, and turn visitors into customers. From quick no-code launches to custom apps, I pair CRO, SEO, and analytics with clean engineering.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -91,7 +89,7 @@ function HeroGrid() {
                   href="/contact"
                   className="group inline-flex items-center gap-2 rounded-xl bg-main-blue px-5 py-3 font-medium text-white shadow-[0_0_0_0_rgba(0,0,0,0.0)] transition hover:bg-brand-blue-deep focus:outline-none focus:ring-2 focus:ring-blue-400/40"
                 >
-                  Reach out
+                  Start a project
                   <svg
                     className="h-4 w-4 transition group-hover:translate-x-0.5"
                     viewBox="0 0 20 20"
